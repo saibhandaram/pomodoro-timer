@@ -12,18 +12,20 @@ SHORT_BREAK_MIN = 1
 LONG_BREAK_MIN = 20
 rep = 0
 my_timer = None
+marks = ""
 
 
 # ---------------------------- TIMER RESET ------------------------------- #
 
 def reset_timer():
     global rep
+    global marks
     window.after_cancel(my_timer)
     canvas.itemconfig(timer_text, text="00:00")
     timer_label.config(text="Timer")
     checkbox_label.config(text="")
     rep = 0
-
+    marks = ""
 
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
@@ -62,9 +64,9 @@ def count_down(count):
         my_timer = window.after(1000, count_down, count - 1)
     else:
         start_timer()
-        marks = ""
         work_sessions = math.floor(rep % 2)
         for _ in range(work_sessions):
+            global marks
             marks += "✔"
 
         checkbox_label.config(text=marks)
